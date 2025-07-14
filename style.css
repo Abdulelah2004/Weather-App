@@ -11,18 +11,26 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 20px; /* Added padding for mobile */
 }
 
 .card {
   width: 90%;
   max-width: 470px;
+  min-width: 300px; /* Prevent too narrow on small devices */
   background: linear-gradient(135deg, #00feba, #5b548a);
   color: #fff;
   border-radius: 3rem;
-  padding: 40px 35px;
+  padding: 30px 25px; /* Reduced padding for mobile */
   text-align: center;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .card {
+    padding: 40px 35px; /* Original padding for larger screens */
+  }
 }
 
 .card:hover {
@@ -36,6 +44,7 @@ body {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
+  gap: 10px; /* Added gap for better mobile spacing */
 }
 
 .search input {
@@ -43,13 +52,22 @@ body {
   outline: none;
   background: #ebfffc;
   color: #333;
-  padding: 10px 25px;
-  height: 60px;
+  padding: 10px 20px; /* Reduced padding for mobile */
+  height: 50px; /* Reduced height for mobile */
   border-radius: 30px;
   flex: 1;
-  margin-right: 16px;
-  font-size: 18px;
+  font-size: 16px; /* Smaller font for mobile */
   transition: box-shadow 0.3s ease;
+  min-width: 0; /* Fix flexbox overflow issue */
+}
+
+@media (min-width: 768px) {
+  .search input {
+    padding: 10px 25px;
+    height: 60px;
+    font-size: 18px;
+    margin-right: 16px;
+  }
 }
 
 .search input:focus {
@@ -61,10 +79,18 @@ body {
   outline: none;
   background: #ebfffc;
   border-radius: 50%;
-  width: 60px;
-  height: 60px;
+  width: 50px; /* Smaller button for mobile */
+  height: 50px;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.3s ease;
+  flex-shrink: 0; /* Prevent button from shrinking */
+}
+
+@media (min-width: 768px) {
+  .search button {
+    width: 60px;
+    height: 60px;
+  }
 }
 
 .search button:hover {
@@ -73,13 +99,26 @@ body {
 }
 
 .search button img {
-  width: 20px;
+  width: 18px; /* Slightly smaller icon */
+}
+
+@media (min-width: 768px) {
+  .search button img {
+    width: 20px;
+  }
 }
 
 .weather-icon {
-  width: 170px;
-  margin-top: 30px;
+  width: 140px; /* Smaller icon for mobile */
+  margin-top: 20px; /* Reduced margin */
   animation: float 2s ease-in-out infinite;
+}
+
+@media (min-width: 768px) {
+  .weather-icon {
+    width: 170px;
+    margin-top: 30px;
+  }
 }
 
 @keyframes float {
@@ -89,47 +128,92 @@ body {
 }
 
 .weather h1 {
-  font-size: 80px;
+  font-size: 60px; /* Smaller font for mobile */
   font-weight: 600;
   margin: 10px 0;
 }
 
+@media (min-width: 768px) {
+  .weather h1 {
+    font-size: 80px;
+  }
+}
+
 .weather h2 {
-  font-size: 40px;
+  font-size: 30px; /* Smaller font for mobile */
   font-weight: 400;
   margin-top: -10px;
   opacity: 0.9;
+}
+
+@media (min-width: 768px) {
+  .weather h2 {
+    font-size: 40px;
+  }
 }
 
 .details {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
-  margin-top: 50px;
+  padding: 0 10px; /* Reduced padding for mobile */
+  margin-top: 30px; /* Reduced margin */
+  flex-wrap: wrap; /* Allow wrapping on very small screens */
+  gap: 15px; /* Added gap for better spacing */
+}
+
+@media (min-width: 768px) {
+  .details {
+    padding: 0 20px;
+    margin-top: 50px;
+    flex-wrap: nowrap;
+  }
 }
 
 .col {
   display: flex;
   align-items: center;
   text-align: left;
-  gap: 10px;
+  gap: 8px; /* Reduced gap for mobile */
+  flex: 1; /* Allow columns to grow */
+  min-width: 120px; /* Minimum width for columns */
+}
+
+@media (min-width: 768px) {
+  .col {
+    gap: 10px;
+    flex: none;
+  }
 }
 
 .col img {
-  width: 40px;
+  width: 30px; /* Smaller icon for mobile */
+}
+
+@media (min-width: 768px) {
+  .col img {
+    width: 40px;
+  }
 }
 
 .humidity,
 .wind {
-  font-size: 26px;
-  margin-top: -6px;
+  font-size: 20px; /* Smaller font for mobile */
+  margin-top: -4px;
   font-weight: bold;
+}
+
+@media (min-width: 768px) {
+  .humidity,
+  .wind {
+    font-size: 26px;
+    margin-top: -6px;
+  }
 }
 
 .error {
   text-align: left;
-  margin-left: 10px;
+  margin-left: 0; /* Adjusted for mobile */
   font-size: 14px;
   margin-top: 10px;
   color: #ffdddd;
@@ -139,9 +223,26 @@ body {
   border-radius: 5px;
   display: none;
   animation: fadeIn 0.5s ease forwards;
+  width: 100%; /* Full width on mobile */
 }
 
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-5px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+/* Loading spinner */
+.loader {
+  display: none;
+  width: 48px;
+  height: 48px;
+  border: 5px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
